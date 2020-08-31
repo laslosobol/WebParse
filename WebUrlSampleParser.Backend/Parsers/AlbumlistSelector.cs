@@ -17,7 +17,6 @@ namespace WebUrlSampleParser.Backend.Parsers
         static string _releaseDateSelector = "td.main_entry span.rel_date";
         private static string _listTitleSelector = "li.currentverylong";
         private static string _listImgSelector = "a img";
-        //static string _imqSrcSelector = "td.main_entry a.list_album";
         public new static async Task<List<Album>> Select(string address)
         {
             List<Album> albumsChart = new List<Album>();
@@ -40,7 +39,6 @@ namespace WebUrlSampleParser.Backend.Parsers
                 albumResult.ListImg = img;
                 albumsChart.Add(albumResult);
             }
-            Console.WriteLine(albumsChart[0].ListImg);
             return albumsChart;
         }
     }

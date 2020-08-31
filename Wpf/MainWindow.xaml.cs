@@ -19,9 +19,6 @@ using WebUrlSampleParser.Backend.Parsers;
 
 namespace Wpf
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -46,12 +43,19 @@ namespace Wpf
             tb.FontSize = 20;
             st.Children.Add(image);
             st.Children.Add(tb);
+            var gridView = new GridView();
+            listView.View = gridView;
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Title", DisplayMemberBinding = new Binding("Title") });
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Artist", DisplayMemberBinding = new Binding("Artist") });
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Album", DisplayMemberBinding = new Binding("Album") });
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Duration", DisplayMemberBinding = new Binding("Duration") });
             foreach (var obj in request)
             {
-                ListViewItem lvi = new ListViewItem();
-                lvi.Content = obj.ToString();
-                lvi.Tag = obj;
-                listView.Items.Add(lvi);
+                listView.Items.Add(obj);
             }
             st.Children.Add(listView);
             Tabs.Items.Add(new TabItem
@@ -65,28 +69,17 @@ namespace Wpf
         {
             var request = await ChartAlbumlistSelector.Select(LinkBox.Text);
             ListView listView = new ListView();
+            var gridView = new GridView();
+            listView.View = gridView;
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Title", DisplayMemberBinding = new Binding("Title") });
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Artist", DisplayMemberBinding = new Binding("Artist") });
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Release Date", DisplayMemberBinding = new Binding("ReleaseDate") });
             foreach (var obj in request)
             {
-                ListViewItem lvi = new ListViewItem();
-                /*BitmapImage bitmap = new BitmapImage();
-                StackPanel st = new StackPanel();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(obj.ImageLink, UriKind.Absolute);
-                bitmap.EndInit();
-                Image image = new Image();
-                image.Height = 15;
-                image.Width = 15;
-                image.Source = bitmap;
-                st.Children.Add(image);
-                TextBlock albumInfo = new TextBlock();
-                albumInfo.Text = obj.ToString();
-                st.Children.Add(albumInfo);
-                st.Height = 20;
-                st.Width = 1440;
-                lvi.Content = st;
-                lvi.Tag = obj;*/
-                lvi.Content = obj.ToString();
-                listView.Items.Add(lvi);
+                listView.Items.Add(obj);
             }
             Tabs.Items.Add(new TabItem
             {
@@ -113,11 +106,17 @@ namespace Wpf
             tb.FontSize = 20;
             st.Children.Add(image);
             st.Children.Add(tb);
+            var gridView = new GridView();
+            listView.View = gridView;
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Title", DisplayMemberBinding = new Binding("Title") });
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Artist", DisplayMemberBinding = new Binding("Artist") });
+            gridView.Columns.Add(new GridViewColumn { 
+                Header = "Release Date", DisplayMemberBinding = new Binding("ReleaseDate") });
             foreach (var obj in request)
             {
-                ListViewItem lvi = new ListViewItem();
-                lvi.Content = obj.ToString();
-                listView.Items.Add(lvi);
+                listView.Items.Add(obj);
             }
             st.Children.Add(listView);
             Tabs.Items.Add(new TabItem

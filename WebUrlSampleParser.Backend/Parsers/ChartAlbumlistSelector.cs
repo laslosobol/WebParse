@@ -15,7 +15,6 @@ namespace WebUrlSampleParser.Backend.Parsers
         private static string _artistNameSelector = "table.mbgen span.chart_detail_line1";
         private static string _albumNameSelector = "table.mbgen a.album";
         private static string _releaseDateSelector = "table.mbgen div.chart_year";
-        //private static string __pictureSelector = "img.delayloading";
 
         public new static async Task<List<Album>> Select(string address)
         {
@@ -24,10 +23,6 @@ namespace WebUrlSampleParser.Backend.Parsers
             var artists = document.QuerySelectorAll(_artistNameSelector);
             var names = document.QuerySelectorAll(_albumNameSelector);
             var releaseDate = document.QuerySelectorAll(_releaseDateSelector);
-            //var pictures = document.QuerySelectorAll(__pictureSelector).Select(el => el.GetAttribute("data-delayloadurl").ToString());
-            //Console.WriteLine(artists.Length);
-            //Console.WriteLine(names.Length);
-            //Console.WriteLine(releaseDate.Length);
             foreach (var album in artists.Zip(names.Zip(releaseDate,
                 (x, y) => (x, y)), (x, y) => (x, y)))
             {
@@ -35,7 +30,6 @@ namespace WebUrlSampleParser.Backend.Parsers
                 albumResult.Title = album.y.x.TextContent;
                 albumResult.Artist = album.x.TextContent;
                 albumResult.ReleaseDate = album.y.y.TextContent;
-                //albumResult.ImageLink = album.y.y;
                 albumsChart.Add(albumResult);
                 
             }
